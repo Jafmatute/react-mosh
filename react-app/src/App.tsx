@@ -1,9 +1,9 @@
-import { FaMedapps } from 'react-icons/fa';
+import Buttom from './components/Button';
 
 const App = () => {
   return (
     <div>
-      <FaMedapps size={100} color='red' />
+      <Buttom onClick={() => {}}>Click</Buttom>
     </div>
   );
 };
