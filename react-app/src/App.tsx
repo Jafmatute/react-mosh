@@ -1,11 +1,9 @@
-import ListGroup from './components/ListGroup';
-
-import { items } from './data/DataCountries';
+import { FaMedapps } from 'react-icons/fa';
 
 const App = () => {
   return (
     <div>
-      <ListGroup items={items} heading='Miami' onSelectItem={() => {}} />
+      <FaMedapps size={100} color='red' />
     </div>
   );
 };
