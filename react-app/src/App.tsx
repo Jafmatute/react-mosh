@@ -1,11 +1,9 @@
-import Alert from './components/Alert';
+import Buttom from './components/Buttom';
 
 const App = () => {
   return (
     <div>
-      <Alert>
-        Bienvenido <span> (a) </span>
-      </Alert>
+      <Buttom onClick={() => console.log('Clicked')}>Guardar</Buttom>
     </div>
   );
 };
