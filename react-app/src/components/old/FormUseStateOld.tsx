@@ -1,6 +1,6 @@
 import {FormEvent, useRef} from "react";
 
-const FormOld = () => {
+const FormUseStateOld = () => {
 
     const nameRef = useRef<HTMLInputElement>(null);
     const ageRef = useRef<HTMLInputElement>(null);
@@ -32,4 +32,4 @@ const FormOld = () => {
         </form>
     );
 }
-export default FormOld
+export default FormUseStateOld
