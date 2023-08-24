@@ -1,34 +1,37 @@
 import {useEffect, useState} from "react";
-import {CanceledError} from './services/api-client.ts';
-import userService, {User} from "./services/use-service.ts";
+import apiClient, {CanceledError} from '../services/api-client.ts';
 
-const App = () => {
+interface User {
+    id: number;
+    name: string;
+}
+
+const AppApiClient = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
+        const controller = new AbortController();
         setLoading(true);
-        const {request, cancel} = userService.getAllUsers();
-
-        request.then(res => {
-            setUsers(res.data)
-            setLoading(false)
-        })
+        apiClient.get<User[]>("/users", {signal: controller.signal})
+            .then(res => {
+                setUsers(res.data)
+                setLoading(false)
+            })
             .catch(err => {
                 if (err instanceof CanceledError) return;
                 setError(err.message)
                 setLoading(false)
             })
 
-        return () => cancel();
-
+        return () => controller.abort();
     }, []);
 
     const deleteUser = (user: User) => {
         setUsers(users.filter(u => u.id !== user.id))
 
-        userService.deleteUser(user.id)
+        apiClient.delete(`/users/${user.id}`)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -40,7 +43,7 @@ const App = () => {
 
         setUsers([newUser, ...users])
 
-        userService.createUser(newUser)
+        apiClient.post("/users", newUser)
             .then(({data: saveUser}) => setUsers([saveUser, ...users]))
             .catch(err => {
                 setError(err.message)
@@ -52,7 +55,8 @@ const App = () => {
     const updateUser = (user: User) => {
         const updateUser = {...user, name: user.name + '!'};
         setUsers(users.map(u => u.id === user.id ? updateUser : u));
-        userService.updateUser(updateUser)
+
+        apiClient.patch("/users/" + user.id, updateUser)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -77,4 +81,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppApiClient;
