@@ -1,27 +1,19 @@
 import {useEffect, useState} from "react";
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 
 interface User {
     id: number;
     name: string;
 }
 
-const App = () => {
+const AppHandlingError = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const res = await axios.get<User[]>("https://jsonplaceholder.typicode.com/users");
-                setUsers(res.data);
-            } catch (err) {
-                setError((err as AxiosError).message);
-            }
-        }
-
-        fetchUsers();
-
+        axios.get<User[]>("https://jsonplaceholder.typicode.com/xusers")
+            .then(res => setUsers(res.data))
+            .catch(err => setError(err.message));
     }, []);
 
     return (
@@ -34,4 +26,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppHandlingError;
