@@ -1,11 +1,33 @@
-import userService, {User} from "./services/use-service.ts";
-import useUsers from "./hooks/useUsers.ts";
+import {useEffect, useState} from "react";
+import {CanceledError} from '../services/api-client.ts';
+import userService, {User} from "../services/use-service.ts";
 
-const App = () => {
-    const {isLoading, users, error, setUsers, setError} = useUsers();
+const AppGenericHttpService = () => {
+    const [users, setUsers] = useState<User[]>([]);
+    const [error, setError] = useState('');
+    const [isLoading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        const {request, cancel} = userService.getAll<User>();
+
+        request.then(res => {
+            setUsers(res.data)
+            setLoading(false)
+        })
+            .catch(err => {
+                if (err instanceof CanceledError) return;
+                setError(err.message)
+                setLoading(false)
+            })
+
+        return () => cancel();
+
+    }, []);
 
     const deleteUser = (user: User) => {
         setUsers(users.filter(u => u.id !== user.id))
+
         userService.delete(user.id)
             .catch(err => {
                 setError(err.message);
@@ -55,4 +77,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppGenericHttpService;

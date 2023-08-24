@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {CanceledError} from '../services/api-client.ts';
-import userService, {User} from "../services/use-service.ts";
+import userService, {User} from "../services/use-service-old.ts";
 
 const AppUserService = () => {
     const [users, setUsers] = useState<User[]>([]);
