@@ -6,7 +6,7 @@ interface User {
     name: string;
 }
 
-const App = () => {
+const AppDeletingData = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
@@ -38,25 +38,10 @@ const App = () => {
             })
     }
 
-    const addUser = () => {
-        const newUser: User = {id: 0, name: "Josue"};
-
-        setUsers([newUser, ...users])
-
-        axios.post("https://jsonplaceholder.typicode.com/users", newUser)
-            .then(({data: saveUser}) => setUsers([saveUser, ...users]))
-            .catch(err => {
-                setError(err.message)
-                setUsers([...users]);
-            })
-
-    };
-
     return (
         <>
             {error && <p className="text-danger">{error}</p>}
             {isLoading && <div className="spinner-border"></div>}
-            <button className="btn btn-primary mb-3" onClick={addUser}>Add</button>
             <ul className="list-group">
                 {users.map((user: User) =>
                     <li key={user.id} className="list-group-item d-flex justify-content-between"> {user.name}
@@ -67,4 +52,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppDeletingData;
