@@ -1,6 +1,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {FieldValues, useForm} from "react-hook-form";
 import {z} from 'zod';
+import {categories} from "../App.tsx";
 
 const schema = z.object({
     description: z.string().min(3, {message: "Description should be at least 3 characters."}),
@@ -10,7 +11,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export const Form = () => {
+export const ExpenseForm = () => {
 
     const {
         register,
@@ -48,9 +49,8 @@ export const Form = () => {
                         <label htmlFor="category" className="form-label">Category</label>
                         <select defaultValue="0" {...register("category")} id="category" className="form-select"
                                 aria-label="Select">
-                            <option value="1">Groceries</option>
-                            <option value="2">Utilities</option>
-                            <option value="3">Entertainment</option>
+                            <option value="">All</option>
+                            {categories.map(category => <option key={category} value={category}>{category}</option>)}
                         </select>
                         {errors.category && <p className="text-danger">{errors.category.message}</p>}
                     </div>

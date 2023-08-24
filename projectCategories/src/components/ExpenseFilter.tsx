@@ -1,3 +1,5 @@
+import {categories} from '../App.tsx';
+
 interface Props {
     onSelectCategory: (category: string) => void;
 }
@@ -7,9 +9,7 @@ const ExpenseFilter = ({onSelectCategory}: Props) => {
         <select name="category" id="category" className="form-control"
                 onChange={(evt) => onSelectCategory(evt.target.value)}>
             <option value="">All categories</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Utilities">Utilities</option>
-            <option value="entertainment">Entertainment</option>
+            {categories.map(category => <option key={category} value={category}>{category}</option>)}
         </select>
     )
 }
