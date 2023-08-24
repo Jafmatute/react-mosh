@@ -3,8 +3,6 @@ import {useState} from "react";
 import ExpenseFilter from "./components/ExpenseFilter.tsx";
 import {ExpenseForm} from "./components/ExpenseForm.tsx";
 
-export const categories = ["Groceries", "Utilities", "Entertainment"];
-
 const App = () => {
 
     const [selectedCategory, setSelectedCategory] = useState('')
