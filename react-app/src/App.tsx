@@ -1,9 +1,16 @@
-import Form from "./components/Form.tsx";
+import ProductList from "./components/ProductList.tsx";
+import {useState} from "react";
 
 const App = () => {
+    const [category, setCategory] = useState('Clothing');
     return (
         <div>
-            <Form/>
+            <select name="category" id="category" className="form-select"
+                    onChange={(evt) => setCategory(evt.target.value)}>
+                <option value="Clothing">Clothing</option>
+                <option value="HouseHold">HouseHold</option>
+            </select>
+            <ProductList category={category}/>
         </div>
     );
 };
