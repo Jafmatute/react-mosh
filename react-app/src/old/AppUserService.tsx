@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
-import {CanceledError} from './services/api-client.ts';
-import userService, {User} from "./services/use-service.ts";
+import {CanceledError} from '../services/api-client.ts';
+import userService, {User} from "../services/use-service.ts";
 
-const App = () => {
+const AppUserService = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        const {request, cancel} = userService.getAll<User>();
+        const {request, cancel} = userService.getAllUsers();
 
         request.then(res => {
             setUsers(res.data)
@@ -28,7 +28,7 @@ const App = () => {
     const deleteUser = (user: User) => {
         setUsers(users.filter(u => u.id !== user.id))
 
-        userService.delete(user.id)
+        userService.deleteUser(user.id)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -40,7 +40,7 @@ const App = () => {
 
         setUsers([newUser, ...users])
 
-        userService.create(newUser)
+        userService.createUser(newUser)
             .then(({data: saveUser}) => setUsers([saveUser, ...users]))
             .catch(err => {
                 setError(err.message)
@@ -52,7 +52,7 @@ const App = () => {
     const updateUser = (user: User) => {
         const updateUser = {...user, name: user.name + '!'};
         setUsers(users.map(u => u.id === user.id ? updateUser : u));
-        userService.update(updateUser)
+        userService.updateUser(updateUser)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -77,4 +77,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppUserService;
