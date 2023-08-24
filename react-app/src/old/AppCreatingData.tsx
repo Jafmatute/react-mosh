@@ -6,7 +6,7 @@ interface User {
     name: string;
 }
 
-const App = () => {
+const AppCreatingData = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
@@ -52,17 +52,6 @@ const App = () => {
 
     };
 
-    const updateUser = (user: User) => {
-        const updateUser = {...user, name: user.name + '!'};
-        setUsers(users.map(u => u.id === user.id ? updateUser : u));
-
-        axios.patch("https://jsonplaceholder.typicode.com/users/" + user.id, updateUser)
-            .catch(err => {
-                setError(err.message);
-                setUsers([...users]);
-            })
-    };
-
     return (
         <>
             {error && <p className="text-danger">{error}</p>}
@@ -71,14 +60,11 @@ const App = () => {
             <ul className="list-group">
                 {users.map((user: User) =>
                     <li key={user.id} className="list-group-item d-flex justify-content-between"> {user.name}
-                        <div>
-                            <button className="btn btn-secondary mx-1" onClick={() => updateUser(user)}>Update</button>
-                            <button className="btn btn-outline-danger" onClick={() => deleteUser(user)}>Delete</button>
-                        </div>
+                        <button className="btn btn-outline-danger" onClick={() => deleteUser(user)}>Delete</button>
                     </li>)}
             </ul>
         </>
     );
 };
 
-export default App;
+export default AppCreatingData;
