@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import apiClient, {CanceledError} from './services/api-client.ts';
+import axios, {CanceledError} from "axios";
 
 interface User {
     id: number;
     name: string;
 }
 
-const App = () => {
+const AppUpdatingData = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const App = () => {
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        apiClient.get<User[]>("/users", {signal: controller.signal})
+        axios.get<User[]>("https://jsonplaceholder.typicode.com/users", {signal: controller.signal})
             .then(res => {
                 setUsers(res.data)
                 setLoading(false)
@@ -31,7 +31,7 @@ const App = () => {
     const deleteUser = (user: User) => {
         setUsers(users.filter(u => u.id !== user.id))
 
-        apiClient.delete(`/users/${user.id}`)
+        axios.delete(`https://jsonplaceholder.typicode.com/users/${user.id}`)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -43,7 +43,7 @@ const App = () => {
 
         setUsers([newUser, ...users])
 
-        apiClient.post("/users", newUser)
+        axios.post("https://jsonplaceholder.typicode.com/users", newUser)
             .then(({data: saveUser}) => setUsers([saveUser, ...users]))
             .catch(err => {
                 setError(err.message)
@@ -56,7 +56,7 @@ const App = () => {
         const updateUser = {...user, name: user.name + '!'};
         setUsers(users.map(u => u.id === user.id ? updateUser : u));
 
-        apiClient.patch("/users/" + user.id, updateUser)
+        axios.patch("https://jsonplaceholder.typicode.com/users/" + user.id, updateUser)
             .catch(err => {
                 setError(err.message);
                 setUsers([...users]);
@@ -81,4 +81,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppUpdatingData;
