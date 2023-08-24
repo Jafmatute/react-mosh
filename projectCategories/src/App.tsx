@@ -19,7 +19,7 @@ const App = () => {
 
     return (
         <>
-            <ExpenseForm/>
+            <ExpenseForm onSubmit={expense => setExpenses([...expenses, {...expense, id: expenses.length + 1}])}/>
             <div className="mb-3">
                 <ExpenseFilter onSelectCategory={category => setSelectedCategory(category)}/>
             </div>

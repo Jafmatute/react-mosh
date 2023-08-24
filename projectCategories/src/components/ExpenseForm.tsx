@@ -1,7 +1,11 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {FieldValues, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {z} from 'zod';
 import categories from "./categories.ts";
+
+interface Props {
+    onSubmit: (data: ExpenseFormData) => void;
+}
 
 const schema = z.object({
     description: z.string().min(3, {message: "Description should be at least 3 characters."}).max(50),
@@ -13,18 +17,20 @@ const schema = z.object({
 
 type ExpenseFormData = z.infer<typeof schema>;
 
-export const ExpenseForm = () => {
+export const ExpenseForm = ({onSubmit}: Props) => {
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: {errors}
     } = useForm<ExpenseFormData>({resolver: zodResolver(schema)});
 
-    const onSubmit = (data: FieldValues) => console.log(data);
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(data => {
+            onSubmit(data);
+            reset();
+        })}>
             <div className="card mb-5 mb-xl-10">
                 <div className="card-header cursor-pointer">
                     <div className="card-title m-0">
