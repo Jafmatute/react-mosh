@@ -9,7 +9,7 @@ interface Props {
 
 const GenreList = ({onSelectedGenre, selectedGenre}: Props) => {
 
-    const {data: genres, isLoading, error} = useGenres();
+    const {data, isLoading, error} = useGenres();
 
     if (error) return null;
 
@@ -19,7 +19,7 @@ const GenreList = ({onSelectedGenre, selectedGenre}: Props) => {
         <>
             <Heading fontSize="2xl" marginBottom={3}>Genres</Heading>
             <List>
-                {genres.map(genre =>
+                {data.map(genre =>
                     <ListItem key={genre.id} padding="10px">
                         <HStack>
                             <Image objectFit="cover" boxSize="32px" borderRadius={8}
