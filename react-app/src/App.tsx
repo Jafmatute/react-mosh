@@ -1,8 +1,10 @@
+import TodoList from "./react-query/TodoList.tsx";
+
+
 const App = () => {
 
     return (
-        <p>Hello Word
-        </p>
+        <TodoList />
     );
 };
 
