@@ -14,10 +14,12 @@ const TodoList = () => {
     const fetchTodos = () => axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
         .then(rs=>rs.data);
 
-    const {data: todos, error} = useQuery<Todo[], Error>({
+    const {data: todos, error, isLoading} = useQuery<Todo[], Error>({
         queryKey:["todos"],
         queryFn: fetchTodos
     })
+
+    if(isLoading) return <p>Loading....</p>
 
     if(error) return <p>{error.message}</p>;
 
