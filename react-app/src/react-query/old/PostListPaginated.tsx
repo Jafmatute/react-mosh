@@ -1,4 +1,4 @@
-import usePosts from "../hooks/usePosts.ts";
+import usePosts from "../hooks/old/usePostsPaginated.ts";
 import {useState} from "react";
 
 const PostList = () => {
