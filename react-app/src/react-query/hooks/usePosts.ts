@@ -8,13 +8,17 @@ interface Posts {
     body:string;
 }
 
-const usePosts = () => {
+const usePosts = (userId:number | undefined) => {
 
-   const fetchPosts = () => axios.get<Posts[]>('https://jsonplaceholder.typicode.com/posts')
+   const fetchPosts = () => axios.get<Posts[]>('https://jsonplaceholder.typicode.com/posts/', {
+       params:{
+           userId
+       }
+   })
        .then(rsp=> rsp.data);
 
    return useQuery<Posts[], Error>({
-       queryKey: ["posts"],
+       queryKey: userId ? ['users', userId, 'posts'] : ["posts"],
        queryFn: fetchPosts,
        staleTime: 60*1000 //1m
    });
