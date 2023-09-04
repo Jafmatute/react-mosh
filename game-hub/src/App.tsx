@@ -5,10 +5,10 @@ import GenreList from "./components/GenreList.tsx";
 import {useState} from "react";
 import {Genre} from "./hooks/useGenres.ts";
 import PlatformSelector from "./components/PlatformSelector.tsx";
-import {Platform} from "./hooks/useGames.ts";
 import SortSelector from "./components/SortSelector.tsx";
 import './App.css';
 import GameHeading from "./components/GameHeading.tsx";
+import {Platform} from "./hooks/usePlatforms.ts";
 
 
 export interface GameQuery {

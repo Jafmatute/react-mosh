@@ -3,7 +3,7 @@ import apiClient from "../services/api-client.ts";
 import {FetchResponse} from "../services/api-client.ts";
 import platforms from "../data/platforms.ts";
 
-interface Platform {
+export interface Platform {
     id: number;
     name: string;
     slug: string;
