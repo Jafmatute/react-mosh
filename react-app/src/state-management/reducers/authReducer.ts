@@ -8,9 +8,10 @@ interface LoginAction {
 interface LogoutAction {
     type:"LOGOUT";
 }
-type Authentication = LoginAction | LogoutAction;
 
-const authReducer = (state:string, action:Authentication):string => {
+export type AuthAction = LoginAction | LogoutAction;
+
+const authReducer = (state:string, action:AuthAction):string => {
 
     if(action.type ==="LOGIN") return action.username;
 
