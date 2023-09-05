@@ -1,10 +1,10 @@
-import Counter from "./state-management/Counter.tsx";
+import TaskList from "./state-management/TaskList.tsx";
 
 const App = () => {
 
     return (
         <>
-            <Counter />
+            <TaskList />
         </>
     );
 };
