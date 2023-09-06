@@ -7,14 +7,7 @@ import PlatformSelector from "./components/PlatformSelector.tsx";
 import SortSelector from "./components/SortSelector.tsx";
 import './App.css';
 import GameHeading from "./components/GameHeading.tsx";
-
-
-export interface GameQuery {
-    genreId?: number;
-    platformId?: number;
-    sortOrder: string;
-    searchText: string;
-}
+import {GameQuery} from "./store.ts";
 
 function App() {
 
@@ -46,7 +39,10 @@ function App() {
                     <Flex marginBottom={5}>
                         <Box marginRight={5}>
                             <PlatformSelector selectedPlatformId={gameQuery.platformId}
-                                              onSelectPlatform={(platform) => setGameQuery({...gameQuery, platformId: platform.id})}/>
+                                              onSelectPlatform={(platform) => setGameQuery({
+                                                  ...gameQuery,
+                                                  platformId: platform.id
+                                              })}/>
                         </Box>
                         <SortSelector sortOrder={gameQuery.sortOrder}
                                       onSelectSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
