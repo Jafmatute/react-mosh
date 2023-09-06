@@ -1,5 +1,5 @@
 import {useReducer} from "react";
-import tasksReducer from "../reducers/tasksReducer.ts";
+import tasksReducer from "../tasks/tasksReducer.ts";
 
 const TaskList = () => {
 const [tasks, dispatch] = useReducer(tasksReducer, []);
