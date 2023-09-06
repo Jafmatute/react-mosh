@@ -1,12 +1,11 @@
-import Counter from "./state-management/counter/Counter.tsx";
-import NavBar from "./state-management/NavBar.tsx";
+import {RouterProvider} from "react-router-dom";
+import routes from "./routing/routes.tsx";
 
 const App = () => {
 
     return (
         <>
-            <NavBar/>
-            <Counter/>
+            <RouterProvider router={routes}/>
         </>
     );
 };
