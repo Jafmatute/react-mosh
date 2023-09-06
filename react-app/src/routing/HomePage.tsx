@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const HomePage = () => {
     return (
         <>
@@ -5,8 +7,10 @@ const HomePage = () => {
                 aliquam beatae consequatur culpa dicta ea eius ex illum officiis quia ratione repellat voluptatem!
                 Labore, laborum?
             </div>
-
-            <a href="/users"> Users </a>
+            <div className="d-flex justify-content-between">
+                <Link to="/users">Users</Link>
+                <Link to="/contact">Contact</Link>
+            </div>
         </>
     )
 }
