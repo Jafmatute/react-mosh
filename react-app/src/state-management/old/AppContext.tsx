@@ -3,8 +3,8 @@ import tasksReducer from "../tasks/tasksReducer.ts";
 import TasksContext from "../tasks/tasksContext.ts";
 import TaskList from "../tasks/TaskList.tsx";
 import NavBar from "../NavBar.tsx";
-import authReducer from "../reducers/authReducer.ts";
-import AuthContext from "../contexts/authContext.ts";
+import authReducer from "../auth/authReducer.ts";
+import AuthContext from "../auth/authContext.ts";
 
 const App = () => {
     const [tasks, tasksDispatch] = useReducer(tasksReducer, []);

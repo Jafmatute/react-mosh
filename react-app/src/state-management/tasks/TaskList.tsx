@@ -1,4 +1,4 @@
-import useAuth from "../hooks/useAuth.ts";
+import useAuth from "../auth/useAuth.ts";
 import useTasks from "./useTasks.ts";
 
 const TaskList = () => {

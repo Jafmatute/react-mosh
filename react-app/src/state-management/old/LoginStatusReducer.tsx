@@ -1,5 +1,5 @@
 import {useReducer} from "react";
-import authReducer from "../reducers/authReducer.ts";
+import authReducer from "../auth/authReducer.ts";
 
 const LoginStatus = () => {
 

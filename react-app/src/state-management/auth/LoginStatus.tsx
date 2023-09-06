@@ -1,4 +1,4 @@
-import useAuth from "./hooks/useAuth.ts";
+import useAuth from "./useAuth.ts";
 
 const LoginStatus = () => {
 
