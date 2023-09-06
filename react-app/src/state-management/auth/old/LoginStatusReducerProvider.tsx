@@ -1,22 +1,22 @@
-import useAuthStore from "./store.ts";
+import useAuth from "../useAuth.ts";
 
 const LoginStatus = () => {
 
-    const {user, login, logout} = useAuthStore()
+    const {user, dispatch} = useAuth();
 
     if (user)
         return (
             <>
                 <div>
                     <span className="mx-2">{user}</span>
-                    <a href="#" onClick={() => logout()}>Logout</a>
+                    <a href="#" onClick={() => dispatch({type: "LOGOUT"})}>Logout</a>
                 </div>
             </>
         );
 
     return (
         <div>
-            <a href="#" onClick={() => login("Josue flores")}>Login</a>
+            <a href="#" onClick={() => dispatch({type: "LOGIN", username: "Josue flores"})}>Login</a>
         </div>
     )
 }
