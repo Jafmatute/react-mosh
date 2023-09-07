@@ -1,10 +1,10 @@
-import Navbar from "../components/Navbar.tsx";
+import NavBar from "../components/NavBar.tsx";
 import {Outlet} from "react-router-dom";
 
 const Layout = () => {
     return (
         <>
-            <Navbar/>
+            <NavBar/>
             <Outlet/>
         </>
     )

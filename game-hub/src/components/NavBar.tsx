@@ -4,13 +4,13 @@ import logo from '../assets/game-hub.webp';
 import ColorModeSwitch from "./ColorModeSwitch.tsx";
 import SearchInput from "./SearchInput.tsx";
 
-const Navbar = () => {
+const NavBar = () => {
     return (
-        <HStack padding="10px">
+        <HStack justifyContent="space-between" padding="10px">
             <Image src={logo} boxSize="70px"/>
             <SearchInput/>
             <ColorModeSwitch/>
         </HStack>
     )
 }
-export default Navbar;
+export default NavBar;
