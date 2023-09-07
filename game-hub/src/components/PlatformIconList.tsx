@@ -4,15 +4,16 @@ import {MdPhoneIphone} from 'react-icons/md';
 import {SiNintendo} from 'react-icons/si';
 import {BsGoogle} from 'react-icons/bs';
 import {IconType} from "react-icons";
-import {Platform} from "../hooks/usePlatforms.ts";
+
+import {Platform} from "../entities/Platform.ts";
 
 interface Props {
-    platforms: Platform[]
+    platforms : Platform[]
 }
 
-const PlatformIconList = ({platforms}: Props) => {
+const PlatformIconList = ({platforms} : Props) => {
 
-    const iconMap: { [key: string]: IconType } = {
+    const iconMap : { [key : string] : IconType } = {
         pc: FaWindows,
         playstation: FaPlaystation,
         xbox: FaXbox,
